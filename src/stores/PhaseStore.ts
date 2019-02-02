@@ -1,13 +1,15 @@
 import React from "react";
 import { action, observable } from "mobx";
 
-class Phase {
+let phaseIdCounter = 0;
+
+export class Phase {
   public id: number;
   @observable public name: string;
   public date: Date;
 
   constructor(data: any) {
-    this.id = data.id;
+    this.id = phaseIdCounter++;
     this.name = data.name;
     this.date = data.date;
   }

@@ -1,8 +1,28 @@
-import React, { useContext, useState } from 'react';
+import React, { ChangeEvent, useContext, useState } from 'react';
 import { Observer } from "mobx-react-lite";
-import { PhaseStore, PhaseStoreContext } from "./stores/PhaseStore";
+import { Phase, PhaseStore, PhaseStoreContext } from "./stores/PhaseStore";
 import logo from './logo.svg';
 import './App.css';
+
+interface PhaseViewProps {
+  phase: Phase
+}
+
+const PhaseView: React.FC<PhaseViewProps> = ({phase}) => {
+  function changeName(event: ChangeEvent<HTMLInputElement>) {
+    phase.name = event.target.value;
+  }
+
+  return (
+    <Observer>
+      {() => (
+        <div>
+          <input type="text" value={phase.name} onChange={changeName}/>
+        </div>
+      )}
+    </Observer>
+  );
+}
 
 function Test() {
   const phaseStore = useContext(PhaseStoreContext);
@@ -14,7 +34,7 @@ function Test() {
       <Observer>
         {() => (
           <div>
-            {phaseStore.phases.map((phase) => <div>{phase.name}</div>)}
+            {phaseStore.phases.map((phase) => <PhaseView key={phase.id} phase={phase}/>)}
           </div>
         )}
       </Observer>
