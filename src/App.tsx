@@ -50,7 +50,7 @@ function OtherTest() {
       othertest&nbsp;
       <Observer>
         {() => (
-          <React.Fragment>{phaseStore.showHint.toString()}</React.Fragment>
+          <span>{phaseStore.showHint.toString()}</span>
         )}
       </Observer>
     </div>
