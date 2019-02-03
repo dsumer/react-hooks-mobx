@@ -57,7 +57,7 @@ function OtherTest() {
   );
 }
 
-function App() {
+function PhaseApp() {
   const [phaseStore, setPhaseStore] = useState(new PhaseStore());
 
   function loadPhaseStoreFromJson() {
@@ -77,6 +77,18 @@ function App() {
   }
 
   return (
+    <div>
+      <button onClick={loadPhaseStoreFromJson}>Load From Json</button>
+      <PhaseStoreContext.Provider value={phaseStore}>
+        <Test/>
+        <OtherTest/>
+      </PhaseStoreContext.Provider>
+    </div>
+  )
+}
+
+function App() {
+  return (
     <div className="App">
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo"/>
@@ -91,11 +103,7 @@ function App() {
         >
           Learn React
         </a>
-        <button onClick={loadPhaseStoreFromJson}>Load From Json</button>
-        <PhaseStoreContext.Provider value={phaseStore}>
-          <Test/>
-          <OtherTest/>
-        </PhaseStoreContext.Provider>
+        <PhaseApp/>
       </header>
     </div>
   );
