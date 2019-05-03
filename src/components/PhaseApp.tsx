@@ -1,25 +1,28 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { PhaseStore, PhaseStoreContext } from '../stores/PhaseStore';
 import Test from './Test';
 import OtherTest from './OtherTest';
 
-export default function PhaseApp() {
-  const [phaseStore, setPhaseStore] = useState(new PhaseStore());
+const phaseStore = new PhaseStore();
 
+export default function PhaseApp() {
   function loadPhaseStoreFromJson() {
     const json = {
       showHint: true,
       phases: [
         {
+          id: 1,
           name: 'lol'
         },
         {
+          id: 2,
           name: 'hehe'
         }
       ]
     };
 
-    setPhaseStore(PhaseStore.deserialize(json));
+    phaseStore.showHint = json.showHint;
+    phaseStore.phases = json.phases;
   }
 
   return (
